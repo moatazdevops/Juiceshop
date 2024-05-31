@@ -1,0 +1,35 @@
+stages:
+    - cache
+    - test
+    - build
+create_cache:
+    image: node:18-bullseye
+    stage: cache
+    script:
+        - yarun install
+    cache:
+        key:
+            files:
+                - yarn.lock
+        paths:
+            - node_modules
+            - yarn.lock
+            - .yarn
+        policy: pull-push
+yarn_test:
+    image: node:18-bullseye
+    stage: test
+    script:
+        - yarn install
+        - yarn test
+build_stage:
+    stage: build
+    image: docker:24
+    services:
+        - docker:24-dind
+    before_script:
+        - docker login -u $register_user -p register_pass
+    script:
+        - docker build -t moatazdevops/demo-app:juiceshop-1.1 .
+        - docker push moatazdevops/demo-app:juiceshop-1.1
+    
