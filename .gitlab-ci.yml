@@ -28,7 +28,7 @@ build_stage:
     services:
         - docker:24-dind
     before_script:
-        - docker login -u $register_user -p register_pass
+        - docker login -u $register_user -p $register_pass
     script:
         - docker build -t moatazdevops/demo-app:juiceshop-1.1 .
         - docker push moatazdevops/demo-app:juiceshop-1.1
