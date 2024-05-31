@@ -6,7 +6,7 @@ create_cache:
     image: node:18-bullseye
     stage: cache
     script:
-        - yarun install
+        - yarn install
     cache:
         key:
             files:
