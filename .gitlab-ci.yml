@@ -15,6 +15,18 @@ git_leaks:
         when: always
         paths:
             - gitleaks.json
+semgrep_test:
+    stage: test
+    image: returntocorp/semgrep
+    variables:
+        SEMGREP_RULES: p/javascript
+    script:
+        - semgrep ci --json --output semgrep.json
+    artifacts:
+        when: always
+        paths:
+            - semgrep.json
+    allow_failure: true
 
 create_cache:
     image: node:18-bullseye
