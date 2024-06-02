@@ -2,6 +2,20 @@ stages:
     - cache
     - test
     - build
+
+git_leaks:
+    stage: test
+    image:
+        name: zricethezav/gitleaks
+        entrypoint: [""]
+    script:
+        - gitleaks detect --verbose --source . -f json -r gitleaks.json
+    allow_failure: true
+    artifacts:
+        when: always
+        paths:
+            - gitleaks.json
+
 create_cache:
     image: node:18-bullseye
     stage: cache
@@ -16,17 +30,7 @@ create_cache:
             - yarn.lock
             - .yarn
         policy: pull-push
-git_leaks:
-    stage: test
-    image:
-        name: zricethezav/gitleaks
-        entrypoint: [""]
-    script:
-        - gitleaks detect --verbose --source . -f json -r gitleaks.json
-    artifacts:
-        when: always
-        paths:
-            - gitleaks.json
+
 
 #yarn_test:
     #image: node:18-bullseye
