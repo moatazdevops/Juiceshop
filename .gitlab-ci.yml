@@ -1,6 +1,6 @@
 stages:
-    - cache
     - test
+    - cache
     - build
 
 git_leaks:
