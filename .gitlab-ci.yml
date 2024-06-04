@@ -28,16 +28,38 @@ semgrep_test:
             - semgrep.json
     allow_failure: true
 
+retire:
+    stage: test
+    image: node:18-bullseye
+    cache:
+        key:
+            files:
+                - yarn.lock
+        paths:
+            - node_modules/
+            - yarn.lock
+            - .yarn
+        policy: pull
+    before_script:
+        - npm install -g retire
+    script:
+        - retire --path . --outputformat json --outputpath retire.json
+    artifacts:
+        when: always
+        paths:
+            - retire.json
+
 upload_report:
     stage: test
     image: python
-    needs: ['git_leaks', 'semgrep_test']
+    needs: ['git_leaks', 'semgrep_test', 'retire']
     when: always
     before_script:
         - pip3 install requests
     script:
         - python3 upload-reports.py gitleaks.json
         - python3 upload-reports.py semgrep.json
+        - python3 upload-reports.py retire.json
 create_cache:
     image: node:18-bullseye
     stage: cache
