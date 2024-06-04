@@ -12,7 +12,7 @@ elif file_name == 'semgrep.json':
 
 headers= {'Authorization': 'Token b3310508f21b17d4fb32df5c00aab168ead16106'}
 url = 'https://demo.defectdojo.org/api/v2/import-scan/'
-data= {'active': True, 'verified': True, 'scan_type': scan_type, 'minimum_severity': 'low', 'engagement': 14}
+data= {'active': True, 'verified': True, 'scan_type': scan_type, 'minimum_severity': 'Low', 'engagement': 14}
 files= {'file': open(file_name, 'rb')}
 response= requests.post(url, headers=headers, data=data, files=files)
 
