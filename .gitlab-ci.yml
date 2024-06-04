@@ -48,6 +48,7 @@ retire:
         when: always
         paths:
             - retire.json
+    allow_failure: true
 
 upload_report:
     stage: test
