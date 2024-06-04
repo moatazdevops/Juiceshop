@@ -9,6 +9,8 @@ if file_name == 'gitleaks.json':
     scan_type = 'Gitleaks Scan'
 elif file_name == 'semgrep.json':
     scan_type = 'Semgrep JSON Report'
+elif file_name == 'retire.json':
+    scan_type = 'Retire.js Scan'
 
 headers= {'Authorization': 'Token b3310508f21b17d4fb32df5c00aab168ead16106'}
 url = 'https://demo.defectdojo.org/api/v2/import-scan/'
