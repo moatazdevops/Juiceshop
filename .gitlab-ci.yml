@@ -28,6 +28,16 @@ semgrep_test:
             - semgrep.json
     allow_failure: true
 
+upload_report:
+    stage: test
+    image: python
+    needs: ['git_leaks', 'semgrep_test']
+    when: always
+    before_script:
+        - pip3 install requests
+    script:
+        - python3 upload-reports.py gitleaks.json
+        - python3 upload-reports.py semgrep.json
 create_cache:
     image: node:18-bullseye
     stage: cache
