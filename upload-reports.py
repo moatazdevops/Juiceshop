@@ -12,7 +12,7 @@ elif file_name == 'semgrep.json':
 elif file_name == 'retire.json':
     scan_type = 'Retire.js Scan'
 
-headers= {'Authorization': 'Token 489a0264109a51903bfedc4cf97d976632d580be'}
+headers= {'Authorization': 'Token 548afd6fab3bea9794a41b31da0e9404f733e222'}
 url = 'https://demo.defectdojo.org/api/v2/import-scan/'
 data= {'active': True, 'verified': True, 'scan_type': scan_type, 'minimum_severity': 'Low', 'engagement': 4}
 files= {'file': open(file_name, 'rb')}
