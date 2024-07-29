@@ -14,7 +14,7 @@ elif file_name == 'retire.json':
 
 headers= {'Authorization': 'Token 489a0264109a51903bfedc4cf97d976632d580be'}
 url = 'https://demo.defectdojo.org/api/v2/import-scan/'
-data= {'active': True, 'verified': True, 'scan_type': scan_type, 'minimum_severity': 'Low', 'engagement': 18}
+data= {'active': True, 'verified': True, 'scan_type': scan_type, 'minimum_severity': 'Low', 'engagement': 4}
 files= {'file': open(file_name, 'rb')}
 response= requests.post(url, headers=headers, data=data, files=files)
 
