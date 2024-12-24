@@ -50,17 +50,17 @@ retire:
             - retire.json
     allow_failure: true
 
-upload_report:
-    stage: test
-    image: python
-    needs: ['git_leaks', 'semgrep_test', 'retire']
-    when: always
-    before_script:
-        - pip3 install requests
-    script:
-        - python3 upload-reports.py gitleaks.json
-        - python3 upload-reports.py semgrep.json
-        - python3 upload-reports.py retire.json
+#upload_report:
+   # stage: test
+   # image: python
+   # needs: ['git_leaks', 'semgrep_test', 'retire']
+   # when: always
+    #before_script:
+      #  - pip3 install requests
+   # script:
+     #   - python3 upload-reports.py gitleaks.json
+      #  - python3 upload-reports.py semgrep.json
+      #  - python3 upload-reports.py retire.json
 create_cache:
     image: node:18-bullseye
     stage: cache
@@ -77,20 +77,20 @@ create_cache:
         policy: pull-push
 
 
-#yarn_test:
-    #image: node:18-bullseye
-   # stage: test
-   # script:
-      #  - yarn install
-      # - yarn test
-#build_stage:
-   # stage: build
-   # image: docker:24
-  #  services:
-     #   - docker:24-dind
-   # before_script:
-     #   - docker login -u $register_user -p $register_pass
-    #script:
-    #    - docker build -t moatazdevops/demo-app:juiceshop-1.1 .
-     #   - docker push moatazdevops/demo-app:juiceshop-1.1
+yarn_test:
+    image: node:18-bullseye
+    stage: test
+    script:
+       - yarn install
+       - yarn test
+build_stage:
+    stage: build
+    image: docker:24
+    services:
+       - docker:24-dind
+    before_script:
+        - docker login -u $register_user -p $register_pass
+    script:
+       - docker build -t moatazdevops/demo-app:juiceshop-1.1 .
+       - docker push moatazdevops/demo-app:juiceshop-1.1
     
